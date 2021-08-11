@@ -1,10 +1,10 @@
 import React from 'react'
-import Navbar from '../components/Navbar.js'
+import NavbarDemo from '../components/NavbarDemo'
 
 const Layout = (props) => {
     return (
         <div>
-            <Navbar />
+            <NavbarDemo />
             {props.children}
         </div>
     )
