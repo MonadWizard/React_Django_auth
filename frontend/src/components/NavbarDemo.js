@@ -18,14 +18,19 @@ const NavbarDemo = () => {
                                 alt="React Bootstrap logo"
                             />
                         </Link>
+
+                        <Link to="/login">
+                            <Button variant="light" size="lg">
+                                Login
+                            </Button>
+                        </Link>
+                        <Link to="/signup">
+                            <Button variant="light" size="lg">
+                                Sign Up
+                            </Button>
+                        </Link>
                     </Navbar.Brand>
                 </Container>
-
-                <Link to="/login">
-                    <Button variant="light" size="lg">
-                        Login
-                    </Button>
-                </Link>
             </Navbar>
         </div>
     )
