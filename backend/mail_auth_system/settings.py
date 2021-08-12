@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 import os
+from datetime import timedelta 
 
 from pathlib import Path
 
@@ -161,6 +162,8 @@ REST_FRAMEWORK = {
 # Configure django-rest-framework-simplejwt to use the Authorization: JWT <access_token> header:
 SIMPLE_JWT = {
     'AUTH_HEADER_TYPES': ('JWT',),
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
 }
 
 
