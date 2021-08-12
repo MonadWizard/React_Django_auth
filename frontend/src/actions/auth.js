@@ -14,7 +14,7 @@ import {
     SIGNUP_SUCCESS,
     SIGNUP_FAIL,
     ACTIVATION_SUCCESS,
-    ACTIVATION_FAIL,
+    ACTIVATION_FAIL
 } from './types'
 
 export const checkAuthenticated = () => async (dispatch) => {
