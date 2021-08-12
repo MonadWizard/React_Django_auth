@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Button, Form } from 'react-bootstrap'
+import { Link, Redirect } from 'react-router-dom'
+
 import { connect } from 'react-redux'
 import { login } from '../actions/auth'
 
-const Login = ({ login }) => {
+const Login = ({ login, isAuthenticated }) => {
     const [formData, setFormData] = useState({
         email: '',
         password: '',
@@ -20,26 +22,31 @@ const Login = ({ login }) => {
 
     // Is the user authenticated?
     // Redirect them to the home page
+    if (isAuthenticated){
+        return <Redirect to='/' />
+    }
 
     return (
         <div className="container mt-5">
-            <h1>Sign In</h1>
-            <p> Sign into your Account </p>
-            <form onSubmit={(e) => onSubmit(e)}>
-                <div className="form-group">
-                    <input
-                        className="form-control"
+            <Form onSubmit={(e) => onSubmit(e)}>
+                <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <Form.Label>Email address</Form.Label>
+                    <Form.Control
                         type="email"
-                        placeholder="Email"
+                        placeholder="Enter email"
                         name="email"
                         value={email}
                         onChange={(e) => onChange(e)}
                         required
                     />
-                </div>
-                <div className="form-group">
-                    <input
-                        className="form-control"
+                    <Form.Text className="text-muted">
+                        We'll never share your email with anyone else.
+                    </Form.Text>
+                </Form.Group>
+
+                <Form.Group className="mb-3" controlId="formBasicPassword">
+                    <Form.Label>Password</Form.Label>
+                    <Form.Control
                         type="password"
                         placeholder="Password"
                         name="password"
@@ -48,13 +55,12 @@ const Login = ({ login }) => {
                         minLength="6"
                         required
                     />
-                </div>
+                </Form.Group>
 
-                <button className="btn btn-primary" type="submit">
-                    Login
-                </button>
-            </form>
-
+                <Button variant="primary" type="submit">
+                    Submit
+                </Button>
+            </Form>
             <p>
                 forget your password !{' '}
                 <Link to="/reset-password"> Reset Password</Link>
@@ -66,8 +72,9 @@ const Login = ({ login }) => {
     )
 }
 
-// const mapStateToProps = state => ({
-//     // is authenticated?
-// })
+const mapStateToProps = state => ({
+    // is authenticated?
+    isAuthenticated: state.auth.isAuthenticated
+})
 
-export default connect(null, { login })(Login)
+export default connect(mapStateToProps, { login })(Login)

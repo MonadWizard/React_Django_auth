@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 const Home = () => {
     return (
-        <div className="container mt-5">
+        <div className="container mt-6">
             <Card>
                 <Card.Header>Djoser</Card.Header>
                 <Card.Body>
@@ -15,10 +15,9 @@ const Home = () => {
                     </Card.Text>
                     <Link to="/login">
                         <Button variant="dark" size="lg">
-                        Go to Login Page
+                            Go to Login Page
                         </Button>
                     </Link>
-                        
                 </Card.Body>
             </Card>
         </div>
