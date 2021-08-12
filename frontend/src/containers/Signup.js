@@ -42,7 +42,7 @@ const Signup = ({ signup, isAuthenticated }) => {
                 <h1>Sign Up</h1>
                 <p>Cteate your accounts </p>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <Form.Label>Email address</Form.Label>
+                    <Form.Label>User Name</Form.Label>
                     <Form.Control
                         type="text"
                         placeholder="Enter UserName"
@@ -103,9 +103,8 @@ const Signup = ({ signup, isAuthenticated }) => {
             </Form>
             <p>
                 already have an account !{' '}
-                <Link to="/login"> Reset Password</Link>
+                <Link to="/login"> Login Account</Link>
             </p>
-            
         </div>
     )
 }
