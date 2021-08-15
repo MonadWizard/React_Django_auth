@@ -5,6 +5,8 @@ import { Link, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { login } from '../actions/auth'
 
+import axios from 'axios'
+
 const Login = ({ login, isAuthenticated }) => {
     const [formData, setFormData] = useState({
         email: '',
@@ -20,10 +22,19 @@ const Login = ({ login, isAuthenticated }) => {
         login(email, password)
     }
 
+    const continueWithGoogle = async () => {
+        try {
+            const res = await axios.get(
+                `${process.env.REACT_APP_API_URL}/auth/o/google-oauth2/?redirect_uri=http://localhost:8000`
+            )
+            window.location.replace(res.data.authorization_url)
+        } catch (error) {}
+    }
+
     // Is the user authenticated?
     // Redirect them to the home page
-    if (isAuthenticated){
-        return <Redirect to='/' />
+    if (isAuthenticated) {
+        return <Redirect to="/" />
     }
 
     return (
@@ -61,6 +72,11 @@ const Login = ({ login, isAuthenticated }) => {
                     Submit
                 </Button>
             </Form>
+
+            <Button color="Danger" onClick={continueWithGoogle}>
+                google sign in
+            </Button>
+
             <p>
                 forget your password !{' '}
                 <Link to="/reset-password"> Reset Password</Link>
@@ -72,9 +88,9 @@ const Login = ({ login, isAuthenticated }) => {
     )
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
     // is authenticated?
-    isAuthenticated: state.auth.isAuthenticated
+    isAuthenticated: state.auth.isAuthenticated,
 })
 
 export default connect(mapStateToProps, { login })(Login)

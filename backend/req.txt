@@ -4,3 +4,4 @@ djangorestframework-simplejwt
 djoser 
 psycopg2 
 psycopg2-binary
+social-auth-app-django

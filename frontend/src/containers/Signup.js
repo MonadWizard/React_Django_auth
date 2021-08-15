@@ -5,6 +5,8 @@ import { Link, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { signup } from '../actions/auth'
 
+import axios from 'axios'
+
 const Signup = ({ signup, isAuthenticated }) => {
     const [accountCreated, setAccountCreated] = useState(false)
     const [formData, setFormData] = useState({
@@ -24,6 +26,15 @@ const Signup = ({ signup, isAuthenticated }) => {
             signup(name, email, password, re_password)
             setAccountCreated(true)
         }
+    }
+
+    const continueWithGoogle = async () => {
+        try {
+            const res = await axios.get(
+                `${process.env.REACT_APP_API_URL}/auth/o/google-oauth2/?redirect_uri=http://localhost:8000`
+            )
+            window.location.replace(res.data.authorization_url)
+        } catch (error) {}
     }
 
     // Is the user authenticated?
@@ -105,7 +116,10 @@ const Signup = ({ signup, isAuthenticated }) => {
                 already have an account !{' '}
                 <Link to="/login"> Reset Password</Link>
             </p>
-            
+
+            <Button variant="Danger" onClick={continueWithGoogle}>
+                google sign Up
+            </Button>
         </div>
     )
 }
