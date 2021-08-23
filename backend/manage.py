@@ -5,8 +5,7 @@ import sys
 
 
 def main():
-    """Run administrative tasks."""
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'mail_auth_system.settings')
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'auth_system.settings')
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:
