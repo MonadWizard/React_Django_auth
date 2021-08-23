@@ -1,27 +1,16 @@
-import React from 'react'
-import { Button, Card } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-const Home = () => {
-    return (
-        <div className="container mt-6">
-            <Card>
-                <Card.Header>Djoser</Card.Header>
-                <Card.Body>
-                    <Card.Title>Django React Auth system</Card.Title>
-                    <Card.Text>
-                        Here we use djoser from Django Rest API and React-Redux
-                        as UI view
-                    </Card.Text>
-                    <Link to="/login">
-                        <Button variant="dark" size="lg">
-                            Go to Login Page
-                        </Button>
-                    </Link>
-                </Card.Body>
-            </Card>
+const Home = () => (
+    <div className='container'>
+        <div class='jumbotron mt-5'>
+            <h1 class='display-4'>Welcome to Auth System!</h1>
+            <p class='lead'>This is an incredible authentication system with production level features!</p>
+            <hr class='my-4' />
+            <p>Click the Log In button</p>
+            <Link class='btn btn-primary btn-lg' to='/login' role='button'>Login</Link>
         </div>
-    )
-}
+    </div>
+);
 
-export default Home
+export default Home;

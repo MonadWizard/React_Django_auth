@@ -1,57 +1,48 @@
-import React, { useState } from 'react'
-import { Button, Form } from 'react-bootstrap'
-import { Redirect } from 'react-router-dom'
-
-import { connect } from 'react-redux'
-import { reset_password } from '../actions/auth'
+import React, { useState } from 'react';
+import { Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { reset_password } from '../actions/auth';
 
 const ResetPassword = ({ reset_password }) => {
-    const [requestSent, setRquestSent] = useState(false)
+    const [requestSent, setRequestSent] = useState(false);
     const [formData, setFormData] = useState({
-        email: '',
-    })
+        email: ''
+    });
 
-    const { email } = formData
-    const onChange = (e) =>
-        setFormData({ ...formData, [e.target.name]: e.target.value })
+    const { email } = formData;
 
-    const onSubmit = (e) => {
-        e.preventDefault()
-        reset_password(email)
-        setRquestSent(true)
-    }
+    const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
 
-    // Is the user authenticated?
-    // Redirect them to the home page
+    const onSubmit = e => {
+        e.preventDefault();
+
+        reset_password(email);
+        setRequestSent(true);
+    };
+
     if (requestSent) {
-        return <Redirect to="/" />
+        return <Redirect to='/' />
     }
 
     return (
-        <div className="container mt-5">
-        <h1>Request password reset: </h1>
-            <Form onSubmit={(e) => onSubmit(e)}>
-                <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <Form.Label>Email address</Form.Label>
-                    <Form.Control
-                        type="email"
-                        placeholder="Enter email"
-                        name="email"
+        <div className='container mt-5'>
+            <h1>Request Password Reset:</h1>
+            <form onSubmit={e => onSubmit(e)}>
+                <div className='form-group'>
+                    <input
+                        className='form-control'
+                        type='email'
+                        placeholder='Email'
+                        name='email'
                         value={email}
-                        onChange={(e) => onChange(e)}
+                        onChange={e => onChange(e)}
                         required
                     />
-                    <Form.Text className="text-muted">
-                        give your valid mail which used to login before
-                    </Form.Text>
-                </Form.Group>
-
-                <Button variant="primary" type="submit">
-                    Reset Password
-                </Button>
-            </Form>
+                </div>
+                <button className='btn btn-primary' type='submit'>Reset Password</button>
+            </form>
         </div>
-    )
-}
+    );
+};
 
-export default connect(null, { reset_password })(ResetPassword)
+export default connect(null, { reset_password })(ResetPassword);
